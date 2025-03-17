@@ -16,10 +16,15 @@ Chess Engine API is a project built on Django. It provides API for a chess engin
 ```cmd
 git clone https://github.com/anigilyatornayapushka/ChessAPI
 ```
+- Create database table in PostgreSQL
 - Create .env in \backend\ directory with next fields:
 ```.env
 SECRET_KEY=your_secret_key
 DEBUG=True  # Or False for production version
+DB_USER=database_user_name
+DB_PASS=database_password
+DB_HOST=127.0.0.1 # another host for production
+DB_PORT=5432
 ```
 - Install dependencies
 ```cmd
