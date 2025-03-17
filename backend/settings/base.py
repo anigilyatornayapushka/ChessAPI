@@ -8,11 +8,11 @@ import decouple
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 sys.path.append(BASE_DIR)
-sys.path.append(os.path.join(BASE_DIR + 'dirs'))
+sys.path.append(os.path.join(BASE_DIR, 'dirs'))
 
-SECRET_KEY = decouple.config('PASSWORD', cast=str)
+SECRET_KEY = decouple.config('SECRET_KEY', cast=str)
 
-DEBUG = decouple.config('PASSWORD', cast=bool)
+DEBUG = decouple.config('DEBUG', cast=bool)
 
 ALLOWED_HOSTS = (
     'localhost',
@@ -26,6 +26,8 @@ DJANGO_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'debug_toolbar',
 )
 
 CUSTOM_APPS = (
@@ -42,6 +44,7 @@ MIDDLEWARE = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 )
 
 ROOT_URLCONF = 'settings.urls'
@@ -68,8 +71,12 @@ WSGI_APPLICATION = 'settings.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': decouple.config('DB_NAME', str),
+        'USER': decouple.config('DB_USER', str),
+        'PASSWORD': decouple.config('DB_PASS', str),
+        'HOST': decouple.config('DB_HOST', str),
+        'PORT': decouple.config('DB_PORT', str),
     }
 }
 
