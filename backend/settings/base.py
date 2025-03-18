@@ -2,6 +2,7 @@
 from pathlib import Path
 import sys
 import os
+import mimetypes
 # Third party
 import decouple
 
@@ -28,6 +29,7 @@ DJANGO_APPS = (
     'django.contrib.staticfiles',
 
     'debug_toolbar',
+    'rest_framework_simplejwt',
 )
 
 CUSTOM_APPS = (
@@ -53,7 +55,7 @@ TEMPLATES = (
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': (
-            '*',
+            'templates',
         ),
         'APP_DIRS': True,
         'OPTIONS': {
@@ -110,3 +112,10 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# DEBUG TOOLBAR
+mimetypes.add_type('application/javascript', '.js', True)
+
+INTERNAL_IPS = (
+    '127.0.0.1',
+)
